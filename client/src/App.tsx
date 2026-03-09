@@ -1,14 +1,14 @@
 import { Typography, List, ListItem, ListItemText } from "@mui/material";
 import {useEffect, useState } from "react"
+import axios from "axios";
 
 function App() {
 
   const [activities, setActivities] = useState<Activity []>([]);
 
   useEffect(() => {
-    fetch('https://localhost:5001/api/activities')
-    .then(response => response.json())
-    .then(date => setActivities(date))
+    axios.get<Activity[]>('https://localhost:5001/api/activities')
+    .then(response => setActivities(response.data))
 
     return () => {}
   }, []);
