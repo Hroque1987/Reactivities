@@ -20,7 +20,9 @@ public class DeleteActivity{
             var activity = await context.Activities.FindAsync([request.Id], cancellationToken) 
             ?? throw new Exception("Cannot find activity");
 
-            await context.Activities.ExecuteDeleteAsync(cancellationToken);
+            context.Remove(activity);
+
+            await context.SaveChangesAsync(cancellationToken);
 
         }
     }
